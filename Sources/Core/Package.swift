@@ -15,6 +15,14 @@ var dependencies: [Package.Dependency] = [
   .package(url: "https://github.com/pointfreeco/swift-parsing", .exact("0.8.0"))
 ]
 
+func ZippyJSONOrNone() -> Array<Target.Dependency> {
+  #if os(macOS)
+    return ["ZippyJSON"]
+  #else
+    return []
+  #endif
+}
+
 #if swift(>=5.6)
 // Add linter if swift version is high enough
 dependencies.append(.package(url: "https://github.com/stackotter/swift-lint-plugin", from: "0.1.0"))
@@ -39,10 +47,9 @@ let package = Package(
         "SwiftProtobuf",
         "Atomics",
         "FirebladeECS",
-        "ZippyJSON",
         .product(name: "Parsing", package: "swift-parsing"),
         .product(name: "Collections", package: "swift-collections")
-      ],
+      ] + ZippyJSONOrNone(),
       path: "Sources",
       exclude: [
         "Cache/Protobuf/BlockModelPalette.proto",

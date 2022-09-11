@@ -184,7 +184,7 @@ public final class Updater: ObservableObject {
   ///
   /// - Returns: A download URL and a version string
   private static func getLatestStableDownloadURL() throws -> (URL, String) {
-    let decoder = ZippyJSONDecoder()
+    let decoder = CustomJSONDecoder()
     decoder.keyDecodingStrategy = .convertFromSnakeCase
     
     let apiURL = URL(string: "https://api.github.com/repos/stackotter/delta-client/releases")!
@@ -213,7 +213,7 @@ public final class Updater: ObservableObject {
   ///
   /// - Returns: A download URL and a version string
   private static func getLatestUnstableDownloadURL(branch: String) throws -> (URL, String) {
-    let decoder = ZippyJSONDecoder()
+    let decoder = CustomJSONDecoder()
     decoder.keyDecodingStrategy = .convertFromSnakeCase
     
     let workflowRuns = try getWorkflowRuns()
@@ -244,7 +244,7 @@ public final class Updater: ObservableObject {
   ///
   /// - Returns: An array of workflow runs
   private static func getWorkflowRuns() throws -> [GitHubWorkflowAPIResponse.WorkflowRun] {
-    let decoder = ZippyJSONDecoder()
+    let decoder = CustomJSONDecoder()
     decoder.keyDecodingStrategy = .convertFromSnakeCase
     
     // Get a list of all workflow runs

@@ -1,5 +1,4 @@
 import Foundation
-import ZippyJSON
 
 public enum PixlyzerError: LocalizedError {
   /// The block with the specified id is missing.
@@ -215,7 +214,7 @@ public enum PixlyzerFormatter {
     let contents = try Data(contentsOf: url)
     
     if useZippyJSON {
-      let decoder = ZippyJSONDecoder()
+      let decoder = CustomJSONDecoder()
       if convertSnakeCase {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
       }
