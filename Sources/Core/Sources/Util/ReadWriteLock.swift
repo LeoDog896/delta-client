@@ -1,10 +1,10 @@
 import Darwin
-import Concurrency
+import Atomics
 
 /// A wrapper around the rwlock C api (`pthread_rwlock_t`).
 public final class ReadWriteLock {
   private var lock = pthread_rwlock_t()
-  private var lockCount = AtomicInt(initialValue: 0)
+  private var lockCount = ManagedAtomic<Int>(0)
   
   /// Creates a new lock.
   public init() {
